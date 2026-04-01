@@ -7,202 +7,195 @@
 
 <title>Zviadi & Naka</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-body {
+body{
   margin:0;
-  font-family:'Inter', sans-serif;
-  background:#f5f5f2;
-  color:#2d2d2d;
-}
-
-/* 💎 LANGUAGE SWITCH */
-.lang-switch {
-  position:fixed;
-  top:20px;
-  right:30px;
   font-family:'Cormorant Garamond', serif;
-  font-size:14px;
-  letter-spacing:2px;
-  cursor:pointer;
+  background:#e8efe9;
+  color:#2d2d2d;
+  overflow-x:hidden;
 }
 
-.lang-switch span {
-  margin:0 5px;
-  opacity:0.5;
-  transition:0.3s;
+/* 🌿 FLOATING LEAVES */
+.leaf{
+  position:fixed;
+  width:20px;
+  height:20px;
+  background:rgba(80,120,80,0.2);
+  border-radius:50%;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  0%{transform:translateY(-100px);}
+  100%{transform:translateY(100vh);}
 }
 
-.lang-switch span.active {
-  opacity:1;
-  border-bottom:1px solid #4f7c4f;
-}
-
-/* 💌 ENVELOPE */
-.envelope-screen {
+/* ================= ENVELOPE ================= */
+.envelope-wrapper{
   position:fixed;
   width:100%;
   height:100%;
-  background:#3f6f4f;
+  background:#e8efe9;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  z-index:100;
   cursor:pointer;
+  z-index:100;
 }
 
-.envelope {
-  width:240px;
-  height:160px;
-  background:#5c8a63;
+.envelope3d{
   position:relative;
-  border-radius:8px;
+  width:320px;
+  height:200px;
+  perspective:1000px;
 }
 
-.flap {
+.back{
   position:absolute;
-  top:-80px;
-  border-left:120px solid transparent;
-  border-right:120px solid transparent;
-  border-bottom:80px solid #4e7a55;
+  width:100%;
+  height:100%;
+  background:url('envelope.png') center/cover no-repeat;
+}
+
+.flap{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:url('envelope.png') center/cover no-repeat;
   transform-origin:top;
   transition:1s;
 }
 
-.open .flap {
-  transform:rotateX(180deg);
+.letter{
+  position:absolute;
+  width:90%;
+  height:90%;
+  background:#fff;
+  top:5%;
+  left:5%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  transform:translateY(40px);
+  transition:0.8s;
+  box-shadow:0 10px 40px rgba(0,0,0,0.25);
 }
 
-.open-text {
-  color:white;
-  margin-top:20px;
-  letter-spacing:3px;
+.letter h2{
+  font-family:'Great Vibes', cursive;
+  font-size:32px;
 }
 
-/* ✨ MAIN */
-.main {
-  display:none;
+.open .flap{
+  transform:rotateX(-180deg);
+}
+
+.open .letter{
+  transform:translateY(-140px);
+}
+
+.open-text{
+  margin-top:30px;
+  font-family:'Great Vibes', cursive;
+  font-size:26px;
+  color:#a67c52;
 }
 
 /* HERO */
-.hero {
+.hero{
   text-align:center;
-  padding:120px 20px;
+  padding:140px 20px;
+  animation:fadeUp 1.5s ease;
 }
 
-.names {
+.names{
   font-family:'Great Vibes', cursive;
-  font-size:90px;
+  font-size:70px;
 }
 
-.text {
-  font-family:'Cormorant Garamond', serif;
-  font-size:22px;
-  max-width:600px;
+.text{
+  max-width:520px;
   margin:20px auto;
+  font-size:20px;
 }
 
-.date {
-  margin-top:10px;
-  font-size:18px;
+.date{
+  margin-top:20px;
+  font-size:24px;
 }
 
 /* COUNTDOWN */
-.countdown {
-  background:#4f7c4f;
+.countdown{
+  background:#3f6f4f;
   color:white;
-  display:flex;
-  justify-content:center;
-  gap:50px;
-  padding:50px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  text-align:center;
+  padding:60px 10px;
 }
 
-.box { font-size:30px; }
-.label { font-size:12px; }
+.countdown div{
+  font-size:38px;
+  transition:0.3s;
+}
 
-/* 📸 SLIDER */
-.slider {
-  max-width:600px;
-  margin:60px auto;
+.countdown div:hover{
+  transform:scale(1.1);
+}
+
+/* SLIDER */
+.slider{
+  position:relative;
+  max-width:520px;
+  margin:80px auto;
+}
+
+.slide{
+  position:absolute;
+  opacity:0;
+  transition:1s;
+}
+
+.slide img{
+  width:100%;
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.25);
+}
+
+.active{
+  opacity:1;
   position:relative;
 }
 
-.slide {
-  width:100%;
-  height:420px;
-  object-fit:cover;
-  border-radius:20px;
-  display:none;
-}
-
-.slide.active {
-  display:block;
-}
-
-.nav {
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:rgba(0,0,0,0.4);
-  color:white;
-  border:none;
-  font-size:24px;
-  padding:10px;
-  border-radius:50%;
-  cursor:pointer;
-}
-
-.prev { left:10px; }
-.next { right:10px; }
-
-.dots {
+/* LOCATION */
+.location{
   text-align:center;
-  margin-top:15px;
+  padding:100px 20px;
 }
 
-.dot {
-  height:10px;
-  width:10px;
-  margin:5px;
-  display:inline-block;
-  background:#ccc;
-  border-radius:50%;
-  cursor:pointer;
+.card{
+  margin-bottom:50px;
+  transition:0.3s;
 }
 
-.dot.active {
-  background:#4f7c4f;
+.card:hover{
+  transform:translateY(-5px);
 }
 
-/* DETAILS */
-.details {
-  text-align:center;
-  padding:80px 20px;
+/* ANIMATION */
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
-.cards {
-  display:flex;
-  justify-content:center;
-  gap:60px;
-  flex-wrap:wrap;
-}
-
-.card {
-  max-width:220px;
-}
-
-.icon {
-  font-size:30px;
-}
-
-.btn {
-  display:inline-block;
-  margin-top:10px;
-  padding:8px 16px;
-  border:1px solid #4f7c4f;
-  color:#4f7c4f;
-  text-decoration:none;
+/* MOBILE */
+@media(max-width:600px){
+  .names{font-size:42px;}
+  .countdown{grid-template-columns:repeat(2,1fr);}
 }
 </style>
 
@@ -210,159 +203,111 @@ body {
 
 <body>
 
-<!-- LANGUAGE -->
+<!-- LEAVES -->
 
-<div class="lang-switch">
-  <span onclick="setLang('en')" id="enBtn" class="active">EN</span>
-  <span onclick="setLang('ka')" id="kaBtn">KA</span>
-</div>
+<script>
+for(let i=0;i<20;i++){
+  let leaf=document.createElement("div");
+  leaf.className="leaf";
+  leaf.style.left=Math.random()*100+"vw";
+  leaf.style.animationDuration=(5+Math.random()*5)+"s";
+  document.body.appendChild(leaf);
+}
+</script>
 
 <!-- ENVELOPE -->
 
-<div class="envelope-screen" onclick="openInvite()">
-  <div id="env">
-    <div class="envelope">
-      <div class="flap"></div>
+<div class="envelope-wrapper" onclick="openEnvelope()">
+  <div class="envelope3d">
+    <div class="back"></div>
+    <div class="letter">
+      <h2>Zviadi & Naka</h2>
+      <p>June 7, 2026</p>
     </div>
-    <div class="open-text">OPEN</div>
+    <div class="flap"></div>
   </div>
+  <p class="open-text">Click to Open</p>
 </div>
 
-<!-- MAIN -->
+<div id="main" style="display:none">
 
-<div class="main" id="main">
+<!-- HERO -->
 
-  <div class="hero">
-    <h1 class="names">Zviadi & Naka</h1>
-
-```
-<p class="text">
-  With hearts full of love, we invite you to be part of the most special day of our lives 💕
-</p>
-
-<p class="date">June 7, 2026</p>
-```
-
+<div class="hero">
+  <div class="names">Zviadi & Naka</div>
+  <div class="text">
+    With hearts full of love, we invite you to be part of the most special day of our lives 💕
   </div>
-
-  <div class="countdown" id="countdown"></div>
-
-  <!-- SLIDER -->
-
-  <div class="slider">
-    <img src="photo1.jpg" class="slide active">
-    <img src="photo2.jpg" class="slide">
-    <img src="photo3.jpg" class="slide">
-    <img src="photo4.jpg" class="slide">
-
-```
-<button class="nav prev" onclick="prevSlide()">❮</button>
-<button class="nav next" onclick="nextSlide()">❯</button>
-
-<div class="dots">
-  <span class="dot active" onclick="goTo(0)"></span>
-  <span class="dot" onclick="goTo(1)"></span>
-  <span class="dot" onclick="goTo(2)"></span>
-  <span class="dot" onclick="goTo(3)"></span>
+  <div class="date">June 7, 2026</div>
 </div>
-```
 
-  </div>
+<!-- COUNTDOWN -->
 
-  <!-- DETAILS -->
+<div class="countdown">
+  <div><span id="d"></span><br>Days</div>
+  <div><span id="h"></span><br>Hours</div>
+  <div><span id="m"></span><br>Min</div>
+  <div><span id="s"></span><br>Sec</div>
+</div>
 
-  <div class="details">
-    <div class="cards">
+<!-- SLIDER -->
 
-```
+<div class="slider">
+  <div class="slide active"><img src="photo1.jpg"></div>
+  <div class="slide"><img src="photo2.jpg"></div>
+  <div class="slide"><img src="photo3.jpg"></div>
+  <div class="slide"><img src="photo4.jpg"></div>
+</div>
+
+<!-- LOCATION -->
+
+<div class="location">
   <div class="card">
-    <div class="icon">⛪</div>
-    <h3>Ceremony</h3>
-    <p>Sioni Cathedral<br>15:00</p>
-    <a class="btn" href="https://maps.google.com?q=Sioni+Cathedral" target="_blank">Map</a>
+    <h3>⛪ Ceremony</h3>
+    <p>Sioni Cathedral — 15:00</p>
   </div>
 
   <div class="card">
-    <div class="icon">🥂</div>
-    <h3>Celebration</h3>
-    <p>Lisi Mere<br>16:00</p>
-    <a class="btn" href="https://maps.google.com?q=Lisi+Mere" target="_blank">Map</a>
+    <h3>🥂 Celebration</h3>
+    <p>Lisi Mere — 16:00</p>
   </div>
-
 </div>
-```
-
-  </div>
 
 </div>
 
 <script>
-function openInvite(){
-  document.getElementById("env").classList.add("open");
+function openEnvelope(){
+  const wrap=document.querySelector('.envelope-wrapper');
+  wrap.classList.add('open');
+
   setTimeout(()=>{
-    document.querySelector('.envelope-screen').style.display='none';
+    wrap.style.display="none";
     document.getElementById('main').style.display='block';
-  },800);
+  },1500);
 }
 
-/* slider */
-let index = 0;
-const slides = document.querySelectorAll(".slide");
-const dots = document.querySelectorAll(".dot");
-
-function showSlide(i){
-  slides.forEach(s=>s.classList.remove("active"));
-  dots.forEach(d=>d.classList.remove("active"));
-  slides[i].classList.add("active");
-  dots[i].classList.add("active");
-}
-
-function nextSlide(){
-  index = (index+1)%slides.length;
-  showSlide(index);
-}
-
-function prevSlide(){
-  index = (index-1+slides.length)%slides.length;
-  showSlide(index);
-}
-
-function goTo(i){
-  index = i;
-  showSlide(index);
-}
-
-setInterval(nextSlide,4000);
-
-/* countdown */
-const targetDate = new Date("June 7, 2026 15:00:00");
+/* COUNTDOWN */
+const target=new Date("June 7, 2026 15:00:00").getTime();
 
 setInterval(()=>{
-  const now=new Date();
-  const diff=targetDate-now;
+  const now=new Date().getTime();
+  const diff=target-now;
 
-  const d=Math.floor(diff/(1000*60*60*24));
-  const h=Math.floor((diff/(1000*60*60))%24);
-  const m=Math.floor((diff/1000/60)%60);
-
-  document.getElementById("countdown").innerHTML =
-    "<div class='box'>"+d+"<div class='label'>DAYS</div></div>"+
-    "<div class='box'>"+h+"<div class='label'>HOURS</div></div>"+
-    "<div class='box'>"+m+"<div class='label'>MIN</div></div>";
+  document.getElementById("d").innerText=Math.floor(diff/(1000*60*60*24));
+  document.getElementById("h").innerText=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  document.getElementById("m").innerText=Math.floor((diff%(1000*60*60))/(1000*60));
+  document.getElementById("s").innerText=Math.floor((diff%(1000*60))/1000);
 },1000);
 
-/* language */
-function setLang(lang){
-  if(lang==='ka'){
-    document.querySelector(".text").innerText =
-      "დიდი სიყვარულით გეპატიჟებით ჩვენი ცხოვრების ყველაზე მნიშვნელოვან დღეს 💕";
-    document.querySelector(".date").innerText = "7 ივნისი, 2026";
-  } else {
-    document.querySelector(".text").innerText =
-      "With hearts full of love, we invite you to be part of the most special day of our lives 💕";
-    document.querySelector(".date").innerText = "June 7, 2026";
-  }
-}
+/* SLIDER */
+let index=0;
+const slides=document.querySelectorAll(".slide");
+
+setInterval(()=>{
+  slides[index].classList.remove("active");
+  index=(index+1)%slides.length;
+  slides[index].classList.add("active");
+},3500);
 </script>
 
 </body>
