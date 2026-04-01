@@ -88,8 +88,13 @@ max-width:520px;
 margin:auto;
 font-size:19px;
 line-height:1.7;
-letter-spacing:0.3px;
 opacity:0.9;
+}
+
+/* date */
+.date{
+margin-top:10px;
+font-size:18px;
 }
 
 /* locations */
@@ -176,14 +181,17 @@ display:block;
 With all our love, we invite you to celebrate the most special day of our lives — our wedding.
 </div>
 
+<div class="date" id="date">June 7, 2026</div>
+
 <div class="locations" id="locations">
 ⛪ Sioni Cathedral — 15:00<br>
 🥂 Lisi Mere — 17:00
 </div>
 
 <div class="slider">
-<div class="slide"><img src="photo1.jpg"></div>
 <div class="slide"><img src="photo2.jpg"></div>
+<div class="slide"><img src="photo1.jpg"></div>
+<div class="slide"><img src="photo3.jpg"></div>
 <div class="slide"><img src="photo4.jpg"></div>
 
 <button class="prev" onclick="moveSlide(-1)">❮</button>
@@ -222,6 +230,11 @@ music.volume=vol;
 clearInterval(fade);
 }
 },200);
+
+/* AUTO LANGUAGE AFTER 5s */
+setTimeout(()=>{
+setLang('ka');
+},5000);
 }
 
 /* slider */
@@ -257,10 +270,10 @@ document.getElementById("s").innerHTML=Math.floor((diff%(1000*60))/1000);
 /* language */
 function setLang(lang){
 document.querySelectorAll('.lang button').forEach(b=>b.classList.remove('active'));
-event.target.classList.add('active');
 
 if(lang==='ka'){
 document.getElementById("text").innerHTML="დიდი სიყვარულით გიწვევთ ჩვენი ცხოვრების ყველაზე მნიშვნელოვან დღეს — ჩვენს ქორწილში.";
+document.getElementById("date").innerHTML="7 ივნისი, 2026";
 document.getElementById("locations").innerHTML="⛪ სიონის ტაძარი — 15:00<br>🥂 ლისი მერე — 17:00";
 
 document.getElementById("t1").innerHTML="დღე";
@@ -270,6 +283,7 @@ document.getElementById("t4").innerHTML="წამი";
 
 }else{
 document.getElementById("text").innerHTML="With all our love, we invite you to celebrate the most special day of our lives — our wedding.";
+document.getElementById("date").innerHTML="June 7, 2026";
 document.getElementById("locations").innerHTML="⛪ Sioni Cathedral — 15:00<br>🥂 Lisi Mere — 17:00";
 
 document.getElementById("t1").innerHTML="Days";
