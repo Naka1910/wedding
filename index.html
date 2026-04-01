@@ -18,13 +18,15 @@ color:#2f3e2f;
 text-align:center;
 }
 
-/* overlay */
+/* overlay FIX */
 body::before{
 content:"";
 position:fixed;
+top:0;
+left:0;
 width:100%;
 height:100%;
-background:rgba(255,248,236,0.95);
+background:rgba(255,248,236,0.97);
 z-index:-1;
 }
 
@@ -33,6 +35,7 @@ z-index:-1;
 position:fixed;
 top:20px;
 right:20px;
+z-index:10;
 }
 .lang button{
 background:none;
@@ -48,28 +51,29 @@ opacity:1;
 font-weight:bold;
 }
 
-/* envelope */
+/* envelope FIX */
 .envelope{
+position:fixed;
+top:0;
+left:0;
+width:100%;
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
+background:#f8f1e8;
+z-index:999;
 cursor:pointer;
 }
 .envelope img{
 width:520px;
-max-width:95%;
+max-width:90%;
 }
 
 /* content */
 .content{
 display:none;
-padding:40px 20px;
-animation:fade 1s ease;
-}
-@keyframes fade{
-from{opacity:0; transform:translateY(20px);}
-to{opacity:1;}
+padding:60px 20px;
 }
 
 /* names */
@@ -96,12 +100,11 @@ line-height:1.8;
 /* slider */
 .slider{
 position:relative;
-max-width:460px;
+max-width:440px;
 margin:40px auto;
 }
 .slide{
 display:none;
-animation:fade 0.7s;
 }
 .slide img{
 width:100%;
@@ -128,17 +131,17 @@ border-radius:50%;
 margin-top:40px;
 display:flex;
 justify-content:center;
-gap:20px;
+gap:15px;
 }
 .countdown div{
 background:white;
-padding:12px 16px;
+padding:10px 14px;
 border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,0.15);
-min-width:60px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+min-width:55px;
 }
 .countdown span{
-font-size:20px;
+font-size:18px;
 font-weight:bold;
 display:block;
 }
@@ -146,7 +149,7 @@ display:block;
 /* mobile */
 @media(max-width:600px){
 .names{font-size:36px}
-.slider{max-width:85%}
+.slider{max-width:90%}
 }
 
 </style>
@@ -159,16 +162,18 @@ display:block;
 <button onclick="setLang('ka')">KA</button>
 </div>
 
-<div class="envelope" onclick="openInvite()">
+<!-- ENVELOPE -->
+<div class="envelope" id="env" onclick="openInvite()">
 <img src="envelope.png.png">
 </div>
 
+<!-- CONTENT -->
 <div class="content" id="content">
 
 <div class="names">Zviadi & Naka</div>
 
 <div class="text" id="text">
-We invite you to be part of the most special day of our lives.
+With all our love, we invite you to celebrate the most special day of our lives — our wedding.
 </div>
 
 <div class="locations" id="locations">
@@ -201,20 +206,19 @@ We invite you to be part of the most special day of our lives.
 
 <script>
 
-/* open */
 function openInvite(){
-document.querySelector(".envelope").style.display="none";
+document.getElementById("env").style.display="none";
 document.getElementById("content").style.display="block";
 
-let music = document.getElementById("music");
-music.volume = 0;
+let music=document.getElementById("music");
+music.volume=0;
 music.play();
 
-let vol = 0;
-let fade = setInterval(()=>{
-if(vol < 1){
-vol += 0.05;
-music.volume = vol;
+let vol=0;
+let fade=setInterval(()=>{
+if(vol<1){
+vol+=0.05;
+music.volume=vol;
 }else{
 clearInterval(fade);
 }
@@ -257,7 +261,7 @@ document.querySelectorAll('.lang button').forEach(b=>b.classList.remove('active'
 event.target.classList.add('active');
 
 if(lang==='ka'){
-document.getElementById("text").innerHTML="გიწვევთ ჩვენს ცხოვრების ყველაზე განსაკუთრებულ დღეს.";
+document.getElementById("text").innerHTML="დიდი სიყვარულით გიწვევთ ჩვენი ცხოვრების ყველაზე მნიშვნელოვან დღეს — ჩვენს ქორწილში.";
 document.getElementById("locations").innerHTML="⛪ სიონის ტაძარი — 15:00<br>🥂 ლისი მერე — 17:00";
 
 document.getElementById("t1").innerHTML="დღე";
@@ -266,288 +270,7 @@ document.getElementById("t3").innerHTML="წუთი";
 document.getElementById("t4").innerHTML="წამი";
 
 }else{
-document.getElementById("text").innerHTML="We invite you to be part of the most special day of our lives.";
-document.getElementById("locations").innerHTML="⛪ Sioni Cathedral — 15:00<br>🥂 Lisi Mere — 17:00";
-
-document.getElementById("t1").innerHTML="Days";
-document.getElementById("t2").innerHTML="Hours";
-document.getElementById("t3").innerHTML="Min";
-document.getElementById("t4").innerHTML="Sec";
-}
-}
-
-</script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Zviadi & Naka</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
-
-<style>
-
-body{
-margin:0;
-font-family:'Montserrat', sans-serif;
-background:url('background.jpg') center/cover fixed;
-color:#2f3e2f;
-text-align:center;
-}
-
-/* overlay */
-body::before{
-content:"";
-position:fixed;
-width:100%;
-height:100%;
-background:rgba(255,248,236,0.95);
-z-index:-1;
-}
-
-/* language */
-.lang{
-position:fixed;
-top:20px;
-right:20px;
-}
-.lang button{
-background:none;
-border:none;
-margin:0 5px;
-cursor:pointer;
-font-size:13px;
-color:#2f3e2f;
-opacity:0.6;
-}
-.lang button.active{
-opacity:1;
-font-weight:bold;
-}
-
-/* envelope */
-.envelope{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-cursor:pointer;
-}
-.envelope img{
-width:520px;
-max-width:95%;
-}
-
-/* content */
-.content{
-display:none;
-padding:40px 20px;
-animation:fade 1s ease;
-}
-@keyframes fade{
-from{opacity:0; transform:translateY(20px);}
-to{opacity:1;}
-}
-
-/* names */
-.names{
-font-family:'Playfair Display', serif;
-font-size:52px;
-margin-bottom:10px;
-}
-
-/* text */
-.text{
-max-width:520px;
-margin:auto;
-font-size:18px;
-}
-
-/* locations */
-.locations{
-margin:30px 0;
-font-size:18px;
-line-height:1.8;
-}
-
-/* slider */
-.slider{
-position:relative;
-max-width:460px;
-margin:40px auto;
-}
-.slide{
-display:none;
-animation:fade 0.7s;
-}
-.slide img{
-width:100%;
-box-shadow:0 10px 30px rgba(0,0,0,0.25);
-}
-
-/* arrows */
-.prev, .next{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-background:rgba(0,0,0,0.4);
-color:white;
-border:none;
-padding:8px 12px;
-cursor:pointer;
-border-radius:50%;
-}
-.prev{left:-10px;}
-.next{right:-10px;}
-
-/* countdown */
-.countdown{
-margin-top:40px;
-display:flex;
-justify-content:center;
-gap:20px;
-}
-.countdown div{
-background:white;
-padding:12px 16px;
-border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,0.15);
-min-width:60px;
-}
-.countdown span{
-font-size:20px;
-font-weight:bold;
-display:block;
-}
-
-/* mobile */
-@media(max-width:600px){
-.names{font-size:36px}
-.slider{max-width:85%}
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="lang">
-<button onclick="setLang('en')" class="active">EN</button>
-<button onclick="setLang('ka')">KA</button>
-</div>
-
-<div class="envelope" onclick="openInvite()">
-<img src="envelope.png.png">
-</div>
-
-<div class="content" id="content">
-
-<div class="names">Zviadi & Naka</div>
-
-<div class="text" id="text">
-We invite you to be part of the most special day of our lives.
-</div>
-
-<div class="locations" id="locations">
-⛪ Sioni Cathedral — 15:00<br>
-🥂 Lisi Mere — 17:00
-</div>
-
-<div class="slider">
-<div class="slide"><img src="photo1.jpg"></div>
-<div class="slide"><img src="photo2.jpg"></div>
-<div class="slide"><img src="photo3.jpg"></div>
-<div class="slide"><img src="photo4.jpg"></div>
-
-<button class="prev" onclick="moveSlide(-1)">❮</button>
-<button class="next" onclick="moveSlide(1)">❯</button>
-</div>
-
-<div class="countdown">
-<div><span id="d"></span><small id="t1">Days</small></div>
-<div><span id="h"></span><small id="t2">Hours</small></div>
-<div><span id="m"></span><small id="t3">Min</small></div>
-<div><span id="s"></span><small id="t4">Sec</small></div>
-</div>
-
-</div>
-
-<audio id="music" loop>
-<source src="music.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-
-/* open */
-function openInvite(){
-document.querySelector(".envelope").style.display="none";
-document.getElementById("content").style.display="block";
-
-let music = document.getElementById("music");
-music.volume = 0;
-music.play();
-
-let vol = 0;
-let fade = setInterval(()=>{
-if(vol < 1){
-vol += 0.05;
-music.volume = vol;
-}else{
-clearInterval(fade);
-}
-},200);
-}
-
-/* slider */
-let index=0;
-showSlide(index);
-
-function moveSlide(n){
-showSlide(index+=n);
-}
-
-function showSlide(n){
-let slides=document.getElementsByClassName("slide");
-if(n>=slides.length) index=0;
-if(n<0) index=slides.length-1;
-
-for(let s of slides){s.style.display="none";}
-slides[index].style.display="block";
-}
-
-/* countdown */
-let target=new Date("June 7, 2026 15:00:00").getTime();
-
-setInterval(()=>{
-let now=new Date().getTime();
-let diff=target-now;
-
-document.getElementById("d").innerHTML=Math.floor(diff/(1000*60*60*24));
-document.getElementById("h").innerHTML=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-document.getElementById("m").innerHTML=Math.floor((diff%(1000*60*60))/(1000*60));
-document.getElementById("s").innerHTML=Math.floor((diff%(1000*60))/1000);
-},1000);
-
-/* language */
-function setLang(lang){
-document.querySelectorAll('.lang button').forEach(b=>b.classList.remove('active'));
-event.target.classList.add('active');
-
-if(lang==='ka'){
-document.getElementById("text").innerHTML="გიწვევთ ჩვენს ცხოვრების ყველაზე განსაკუთრებულ დღეს.";
-document.getElementById("locations").innerHTML="⛪ სიონის ტაძარი — 15:00<br>🥂 ლისი მერე — 17:00";
-
-document.getElementById("t1").innerHTML="დღე";
-document.getElementById("t2").innerHTML="საათი";
-document.getElementById("t3").innerHTML="წუთი";
-document.getElementById("t4").innerHTML="წამი";
-
-}else{
-document.getElementById("text").innerHTML="We invite you to be part of the most special day of our lives.";
+document.getElementById("text").innerHTML="With all our love, we invite you to celebrate the most special day of our lives — our wedding.";
 document.getElementById("locations").innerHTML="⛪ Sioni Cathedral — 15:00<br>🥂 Lisi Mere — 17:00";
 
 document.getElementById("t1").innerHTML="Days";
