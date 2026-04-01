@@ -6,19 +6,19 @@
 
 <title>Zviadi & Naka</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 
 body{
 margin:0;
-font-family:'Marcellus', serif;
+font-family:'Playfair Display', serif;
 background:url('background.jpg') center/cover fixed;
 color:#2f3e2f;
 text-align:center;
 }
 
-/* overlay (უფრო ძლიერი რომ ტექსტი ჩანდეს) */
+/* overlay */
 body::before{
 content:"";
 position:fixed;
@@ -85,8 +85,14 @@ to{opacity:1; transform:translateY(0);}
 /* names */
 .names{
 font-size:52px;
-letter-spacing:1px;
 margin-bottom:10px;
+}
+
+/* FIXED AMPERSAND */
+.amp{
+font-family:'Great Vibes', cursive;
+font-size:60px;
+margin:0 6px;
 }
 
 /* text */
@@ -182,7 +188,9 @@ display:block;
 
 <div class="content" id="content">
 
-<div class="names">Zviadi & Naka</div>
+<div class="names">
+Zviadi <span class="amp">&</span> Naka
+</div>
 
 <div class="text" id="text">
 With all our love, we invite you to celebrate the most special day of our lives — our wedding.
@@ -238,64 +246,46 @@ clearInterval(fade);
 }
 },200);
 
-/* AUTO LANGUAGE */
-setTimeout(()=>{
-setLang('ka');
-},5000);
+setTimeout(()=>{setLang('ka');},5000);
 }
 
 /* slider */
 let index=0;
 showSlide(index);
 
-function moveSlide(n){
-showSlide(index+=n);
-}
+function moveSlide(n){showSlide(index+=n);}
 
 function showSlide(n){
 let slides=document.getElementsByClassName("slide");
 if(n>=slides.length) index=0;
 if(n<0) index=slides.length-1;
-
 for(let s of slides){s.style.display="none";}
 slides[index].style.display="block";
 }
 
 /* countdown */
 let target=new Date("June 7, 2026 15:00:00").getTime();
-
 setInterval(()=>{
 let now=new Date().getTime();
 let diff=target-now;
-
-document.getElementById("d").innerHTML=Math.floor(diff/(1000*60*60*24));
-document.getElementById("h").innerHTML=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-document.getElementById("m").innerHTML=Math.floor((diff%(1000*60*60))/(1000*60));
-document.getElementById("s").innerHTML=Math.floor((diff%(1000*60))/1000);
+d.innerHTML=Math.floor(diff/(1000*60*60*24));
+h.innerHTML=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+m.innerHTML=Math.floor((diff%(1000*60*60))/(1000*60));
+s.innerHTML=Math.floor((diff%(1000*60))/1000);
 },1000);
 
 /* language */
 function setLang(lang){
-
 if(lang==='ka'){
-document.getElementById("text").innerHTML="დიდი სიყვარულით გიწვევთ ჩვენი ცხოვრების ყველაზე მნიშვნელოვან დღეს — ჩვენს ქორწილში.";
-document.getElementById("date").innerHTML="7 ივნისი, 2026";
-document.getElementById("locations").innerHTML="⛪ სიონის ტაძარი — 15:00<br>🥂 ლისი მერე — 17:00";
-
-document.getElementById("t1").innerHTML="დღე";
-document.getElementById("t2").innerHTML="საათი";
-document.getElementById("t3").innerHTML="წუთი";
-document.getElementById("t4").innerHTML="წამი";
-
+text.innerHTML="დიდი სიყვარულით გიწვევთ ჩვენი ცხოვრების ყველაზე მნიშვნელოვან დღეს — ჩვენს ქორწილში.";
+date.innerHTML="7 ივნისი, 2026";
+locations.innerHTML="⛪ სიონის ტაძარი — 15:00<br>🥂 ლისი მერე — 17:00";
+t1.innerHTML="დღე"; t2.innerHTML="საათი"; t3.innerHTML="წუთი"; t4.innerHTML="წამი";
 }else{
-document.getElementById("text").innerHTML="With all our love, we invite you to celebrate the most special day of our lives — our wedding.";
-document.getElementById("date").innerHTML="June 7, 2026";
-document.getElementById("locations").innerHTML="⛪ Sioni Cathedral — 15:00<br>🥂 Lisi Mere — 17:00";
-
-document.getElementById("t1").innerHTML="Days";
-document.getElementById("t2").innerHTML="Hours";
-document.getElementById("t3").innerHTML="Min";
-document.getElementById("t4").innerHTML="Sec";
+text.innerHTML="With all our love, we invite you to celebrate the most special day of our lives — our wedding.";
+date.innerHTML="June 7, 2026";
+locations.innerHTML="⛪ Sioni Cathedral — 15:00<br>🥂 Lisi Mere — 17:00";
+t1.innerHTML="Days"; t2.innerHTML="Hours"; t3.innerHTML="Min"; t4.innerHTML="Sec";
 }
 }
 
