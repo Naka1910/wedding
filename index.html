@@ -7,29 +7,15 @@
 
 <title>Zviadi & Naka</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&family=Inter:wght@300&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  font-family:'Cormorant Garamond', serif;
-  background:#3f6f4f;
-  color:white;
+  background:#f6f1ea;
+  color:#2f2f2f;
   text-align:center;
-}
-
-/* 🌿 LEAVES */
-.leaf{
-  position:fixed;
-  width:10px;
-  height:10px;
-  background:rgba(255,255,255,0.2);
-  border-radius:50%;
-  animation:fall linear infinite;
-}
-@keyframes fall{
-  0%{transform:translateY(-50px);}
-  100%{transform:translateY(100vh);}
+  font-family:'Inter', sans-serif;
 }
 
 /* 💌 ENVELOPE */
@@ -44,7 +30,7 @@ body{
 
 .envelope-img{
   width:280px;
-  transition:0.6s;
+  transition:0.4s;
 }
 
 .envelope-wrapper:hover .envelope-img{
@@ -52,50 +38,66 @@ body{
 }
 
 .open-text{
-  margin-top:20px;
-  font-family:'Great Vibes', cursive;
-  font-size:26px;
-  color:#e8d5b7;
+  margin-top:15px;
+  font-family:'Playfair Display', serif;
+  color:#8c6b4f;
+  font-size:18px;
 }
 
-/* ✨ MAIN */
+/* MAIN */
 #main{
   display:none;
-  padding:40px 20px;
+  padding:30px 20px;
 }
 
-/* HERO */
+/* NAMES */
 .names{
   font-family:'Great Vibes', cursive;
-  font-size:48px;
+  font-size:56px;
 }
 
+/* TEXT */
 .text{
-  max-width:400px;
+  max-width:420px;
   margin:10px auto;
-  font-size:16px;
+  font-family:'Playfair Display', serif;
+  font-size:17px;
 }
 
+.heart{
+  color:#c9a37a;
+}
+
+/* DATE */
 .date{
   margin-top:10px;
   font-size:18px;
+  color:#8c6b4f;
 }
 
 /* COUNTDOWN */
 .countdown{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  margin:30px 0;
+  margin:25px auto;
+  max-width:400px;
 }
 .countdown div{
-  font-size:26px;
+  font-family:'Playfair Display', serif;
+  font-size:24px;
 }
 
-/* 📸 SLIDER */
+/* 📸 SLIDER SECTION */
+.slider-section{
+  background:#3f6f4f;
+  padding:30px 0;
+  margin-top:25px;
+}
+
 .slider{
   position:relative;
-  max-width:320px;
-  margin:30px auto;
+  max-width:240px;
+  margin:auto;
 }
 
 .slider img{
@@ -107,27 +109,48 @@ body{
   position:absolute;
   top:50%;
   transform:translateY(-50%);
-  font-size:24px;
-  background:rgba(0,0,0,0.3);
-  padding:5px 10px;
+  font-size:26px;
+  color:white;
   cursor:pointer;
+  opacity:0.8;
 }
 
-.left{left:0;}
-.right{right:0;}
+.arrow:hover{
+  opacity:1;
+}
+
+.left{left:-30px;}
+.right{right:-30px;}
 
 /* LOCATION */
 .location{
-  margin-top:30px;
+  margin-top:35px;
 }
 
 .card{
-  margin:15px 0;
+  background:white;
+  padding:18px;
+  margin:12px auto;
+  max-width:260px;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.06);
+}
+
+.card h3{
+  font-family:'Playfair Display', serif;
+  margin-bottom:8px;
+}
+
+.card p{
+  color:#6b6b6b;
+  font-size:15px;
 }
 
 /* MOBILE */
 @media(max-width:600px){
-  .countdown{grid-template-columns:repeat(2,1fr);}
+  .countdown{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 </style>
 
@@ -135,26 +158,14 @@ body{
 
 <body>
 
-<!-- 🌿 LEAVES -->
-
-<script>
-for(let i=0;i<15;i++){
-  let leaf=document.createElement("div");
-  leaf.className="leaf";
-  leaf.style.left=Math.random()*100+"vw";
-  leaf.style.animationDuration=(5+Math.random()*5)+"s";
-  document.body.appendChild(leaf);
-}
-</script>
-
 <!-- 💌 ENVELOPE -->
 
 <div class="envelope-wrapper" onclick="openInvite()">
-  <img src="envelope.png" class="envelope-img">
+  <img src="envelope.png.png" class="envelope-img">
   <div class="open-text">Click to Open</div>
 </div>
 
-<!-- ✨ MAIN -->
+<!-- MAIN -->
 
 <div id="main">
 
@@ -162,6 +173,7 @@ for(let i=0;i<15;i++){
 
 <div class="text">
 With hearts full of love, we invite you to be part of the most special day of our lives
+<span class="heart">♡</span>
 </div>
 
 <div class="date">June 7, 2026</div>
@@ -175,26 +187,30 @@ With hearts full of love, we invite you to be part of the most special day of ou
   <div><span id="s"></span><br>Sec</div>
 </div>
 
-<!-- SLIDER -->
+<!-- 📸 SLIDER -->
 
-<div class="slider">
-  <span class="arrow left" onclick="prev()">‹</span>
-  <img id="slide" src="photo1.jpg">
-  <span class="arrow right" onclick="next()">›</span>
+<div class="slider-section">
+  <div class="slider">
+    <span class="arrow left" onclick="prev()">‹</span>
+    <img id="slide" src="photo1.jpg">
+    <span class="arrow right" onclick="next()">›</span>
+  </div>
 </div>
 
-<!-- LOCATION -->
+<!-- 📍 LOCATION -->
 
 <div class="location">
-  <div class="card">
-    <h3>Ceremony</h3>
-    <p>Sioni Cathedral — 15:00</p>
-  </div>
 
-  <div class="card">
-    <h3>Celebration</h3>
-    <p>Lisi Mere — 16:00</p>
-  </div>
+<div class="card">
+  <h3>Ceremony</h3>
+  <p>Sioni Cathedral — 15:00</p>
+</div>
+
+<div class="card">
+  <h3>Celebration</h3>
+  <p>Lisi Mere — 16:00</p>
+</div>
+
 </div>
 
 </div>
