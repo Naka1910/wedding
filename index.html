@@ -6,7 +6,7 @@
 
 <title>Zviadi & Naka</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 
@@ -26,7 +26,7 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(255,248,236,0.97);
+background:rgba(255,248,236,0.96);
 z-index:-1;
 }
 
@@ -74,12 +74,24 @@ max-width:90%;
 .content{
 display:none;
 padding:60px 20px;
+animation:fade 1.5s ease;
+}
+
+@keyframes fade{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
 }
 
 /* names */
 .names{
 font-size:52px;
 margin-bottom:10px;
+}
+
+.amp{
+font-family:'Great Vibes', cursive;
+font-size:60px;
+margin:0 8px;
 }
 
 /* text */
@@ -107,7 +119,7 @@ line-height:1.8;
 /* slider */
 .slider{
 position:relative;
-max-width:440px;
+max-width:420px;
 margin:40px auto;
 }
 .slide{
@@ -115,7 +127,7 @@ display:none;
 }
 .slide img{
 width:100%;
-box-shadow:0 10px 30px rgba(0,0,0,0.25);
+box-shadow:0 12px 30px rgba(0,0,0,0.25);
 }
 
 /* arrows */
@@ -142,10 +154,10 @@ gap:15px;
 }
 .countdown div{
 background:white;
-padding:10px 14px;
-border-radius:10px;
+padding:12px 16px;
+border-radius:12px;
 box-shadow:0 5px 15px rgba(0,0,0,0.2);
-min-width:55px;
+min-width:60px;
 }
 .countdown span{
 font-size:18px;
@@ -175,7 +187,9 @@ display:block;
 
 <div class="content" id="content">
 
-<div class="names">Zviadi <span class="amp">&</span> Naka</div>
+<div class="names">
+Zviadi <span class="amp">&</span> Naka
+</div>
 
 <div class="text" id="text">
 With all our love, we invite you to celebrate the most special day of our lives — our wedding.
@@ -231,7 +245,7 @@ clearInterval(fade);
 }
 },200);
 
-/* AUTO LANGUAGE AFTER 5s */
+/* AUTO LANGUAGE */
 setTimeout(()=>{
 setLang('ka');
 },5000);
@@ -269,7 +283,6 @@ document.getElementById("s").innerHTML=Math.floor((diff%(1000*60))/1000);
 
 /* language */
 function setLang(lang){
-document.querySelectorAll('.lang button').forEach(b=>b.classList.remove('active'));
 
 if(lang==='ka'){
 document.getElementById("text").innerHTML="დიდი სიყვარულით გიწვევთ ჩვენი ცხოვრების ყველაზე მნიშვნელოვან დღეს — ჩვენს ქორწილში.";
