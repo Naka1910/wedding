@@ -13,188 +13,120 @@
 body{
   margin:0;
   font-family:'Cormorant Garamond', serif;
-  background:#e8efe9;
-  color:#2d2d2d;
-  overflow-x:hidden;
+  background:#3f6f4f;
+  color:white;
+  text-align:center;
 }
 
-/* 🌿 FLOATING LEAVES */
+/* 🌿 LEAVES */
 .leaf{
   position:fixed;
-  width:20px;
-  height:20px;
-  background:rgba(80,120,80,0.2);
+  width:10px;
+  height:10px;
+  background:rgba(255,255,255,0.2);
   border-radius:50%;
   animation:fall linear infinite;
 }
 @keyframes fall{
-  0%{transform:translateY(-100px);}
+  0%{transform:translateY(-50px);}
   100%{transform:translateY(100vh);}
 }
 
-/* ================= ENVELOPE ================= */
+/* 💌 ENVELOPE */
 .envelope-wrapper{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:#e8efe9;
+  height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   cursor:pointer;
-  z-index:100;
 }
 
-.envelope3d{
-  position:relative;
-  width:320px;
-  height:200px;
-  perspective:1000px;
+.envelope-img{
+  width:280px;
+  transition:0.6s;
 }
 
-.back{
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:url('envelope.png') center/cover no-repeat;
-}
-
-.flap{
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:url('envelope.png') center/cover no-repeat;
-  transform-origin:top;
-  transition:1s;
-}
-
-.letter{
-  position:absolute;
-  width:90%;
-  height:90%;
-  background:#fff;
-  top:5%;
-  left:5%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  transform:translateY(40px);
-  transition:0.8s;
-  box-shadow:0 10px 40px rgba(0,0,0,0.25);
-}
-
-.letter h2{
-  font-family:'Great Vibes', cursive;
-  font-size:32px;
-}
-
-.open .flap{
-  transform:rotateX(-180deg);
-}
-
-.open .letter{
-  transform:translateY(-140px);
+.envelope-wrapper:hover .envelope-img{
+  transform:scale(1.05);
 }
 
 .open-text{
-  margin-top:30px;
+  margin-top:20px;
   font-family:'Great Vibes', cursive;
   font-size:26px;
-  color:#a67c52;
+  color:#e8d5b7;
+}
+
+/* ✨ MAIN */
+#main{
+  display:none;
+  padding:40px 20px;
 }
 
 /* HERO */
-.hero{
-  text-align:center;
-  padding:140px 20px;
-  animation:fadeUp 1.5s ease;
-}
-
 .names{
   font-family:'Great Vibes', cursive;
-  font-size:70px;
+  font-size:48px;
 }
 
 .text{
-  max-width:520px;
-  margin:20px auto;
-  font-size:20px;
+  max-width:400px;
+  margin:10px auto;
+  font-size:16px;
 }
 
 .date{
-  margin-top:20px;
-  font-size:24px;
+  margin-top:10px;
+  font-size:18px;
 }
 
 /* COUNTDOWN */
 .countdown{
-  background:#3f6f4f;
-  color:white;
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  text-align:center;
-  padding:60px 10px;
+  margin:30px 0;
 }
-
 .countdown div{
-  font-size:38px;
-  transition:0.3s;
+  font-size:26px;
 }
 
-.countdown div:hover{
-  transform:scale(1.1);
-}
-
-/* SLIDER */
+/* 📸 SLIDER */
 .slider{
   position:relative;
-  max-width:520px;
-  margin:80px auto;
+  max-width:320px;
+  margin:30px auto;
 }
 
-.slide{
-  position:absolute;
-  opacity:0;
-  transition:1s;
-}
-
-.slide img{
+.slider img{
   width:100%;
-  border-radius:20px;
-  box-shadow:0 20px 50px rgba(0,0,0,0.25);
+  border-radius:12px;
 }
 
-.active{
-  opacity:1;
-  position:relative;
+.arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:24px;
+  background:rgba(0,0,0,0.3);
+  padding:5px 10px;
+  cursor:pointer;
 }
+
+.left{left:0;}
+.right{right:0;}
 
 /* LOCATION */
 .location{
-  text-align:center;
-  padding:100px 20px;
+  margin-top:30px;
 }
 
 .card{
-  margin-bottom:50px;
-  transition:0.3s;
-}
-
-.card:hover{
-  transform:translateY(-5px);
-}
-
-/* ANIMATION */
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(30px);}
-  to{opacity:1; transform:translateY(0);}
+  margin:15px 0;
 }
 
 /* MOBILE */
 @media(max-width:600px){
-  .names{font-size:42px;}
   .countdown{grid-template-columns:repeat(2,1fr);}
 }
 </style>
@@ -203,10 +135,10 @@ body{
 
 <body>
 
-<!-- LEAVES -->
+<!-- 🌿 LEAVES -->
 
 <script>
-for(let i=0;i<20;i++){
+for(let i=0;i<15;i++){
   let leaf=document.createElement("div");
   leaf.className="leaf";
   leaf.style.left=Math.random()*100+"vw";
@@ -215,31 +147,24 @@ for(let i=0;i<20;i++){
 }
 </script>
 
-<!-- ENVELOPE -->
+<!-- 💌 ENVELOPE -->
 
-<div class="envelope-wrapper" onclick="openEnvelope()">
-  <div class="envelope3d">
-    <div class="back"></div>
-    <div class="letter">
-      <h2>Zviadi & Naka</h2>
-      <p>June 7, 2026</p>
-    </div>
-    <div class="flap"></div>
-  </div>
-  <p class="open-text">Click to Open</p>
+<div class="envelope-wrapper" onclick="openInvite()">
+  <img src="envelope.png" class="envelope-img">
+  <div class="open-text">Click to Open</div>
 </div>
 
-<div id="main" style="display:none">
+<!-- ✨ MAIN -->
 
-<!-- HERO -->
+<div id="main">
 
-<div class="hero">
-  <div class="names">Zviadi & Naka</div>
-  <div class="text">
-    With hearts full of love, we invite you to be part of the most special day of our lives 💕
-  </div>
-  <div class="date">June 7, 2026</div>
+<div class="names">Zviadi & Naka</div>
+
+<div class="text">
+With hearts full of love, we invite you to be part of the most special day of our lives
 </div>
+
+<div class="date">June 7, 2026</div>
 
 <!-- COUNTDOWN -->
 
@@ -253,22 +178,21 @@ for(let i=0;i<20;i++){
 <!-- SLIDER -->
 
 <div class="slider">
-  <div class="slide active"><img src="photo1.jpg"></div>
-  <div class="slide"><img src="photo2.jpg"></div>
-  <div class="slide"><img src="photo3.jpg"></div>
-  <div class="slide"><img src="photo4.jpg"></div>
+  <span class="arrow left" onclick="prev()">‹</span>
+  <img id="slide" src="photo1.jpg">
+  <span class="arrow right" onclick="next()">›</span>
 </div>
 
 <!-- LOCATION -->
 
 <div class="location">
   <div class="card">
-    <h3>⛪ Ceremony</h3>
+    <h3>Ceremony</h3>
     <p>Sioni Cathedral — 15:00</p>
   </div>
 
   <div class="card">
-    <h3>🥂 Celebration</h3>
+    <h3>Celebration</h3>
     <p>Lisi Mere — 16:00</p>
   </div>
 </div>
@@ -276,14 +200,9 @@ for(let i=0;i<20;i++){
 </div>
 
 <script>
-function openEnvelope(){
-  const wrap=document.querySelector('.envelope-wrapper');
-  wrap.classList.add('open');
-
-  setTimeout(()=>{
-    wrap.style.display="none";
-    document.getElementById('main').style.display='block';
-  },1500);
+function openInvite(){
+  document.querySelector('.envelope-wrapper').style.display='none';
+  document.getElementById('main').style.display='block';
 }
 
 /* COUNTDOWN */
@@ -293,21 +212,28 @@ setInterval(()=>{
   const now=new Date().getTime();
   const diff=target-now;
 
-  document.getElementById("d").innerText=Math.floor(diff/(1000*60*60*24));
-  document.getElementById("h").innerText=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  document.getElementById("m").innerText=Math.floor((diff%(1000*60*60))/(1000*60));
-  document.getElementById("s").innerText=Math.floor((diff%(1000*60))/1000);
+  d.innerText=Math.floor(diff/(1000*60*60*24));
+  h.innerText=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  m.innerText=Math.floor((diff%(1000*60*60))/(1000*60));
+  s.innerText=Math.floor((diff%(1000*60))/1000);
 },1000);
 
 /* SLIDER */
-let index=0;
-const slides=document.querySelectorAll(".slide");
+let i=1;
 
-setInterval(()=>{
-  slides[index].classList.remove("active");
-  index=(index+1)%slides.length;
-  slides[index].classList.add("active");
-},3500);
+function show(){
+  document.getElementById("slide").src="photo"+i+".jpg";
+}
+
+function next(){
+  i++; if(i>4)i=1;
+  show();
+}
+
+function prev(){
+  i--; if(i<1)i=4;
+  show();
+}
 </script>
 
 </body>
