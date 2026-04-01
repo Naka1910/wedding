@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zviadi & Naka Wedding</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family:'Inter', sans-serif;
+  background:#f4f6f1;
+  color:#2f3e2f;
+  text-align:center;
+}
+
+/* HERO */
+.hero {
+  padding:120px 20px;
+  background:#eef3ea;
+}
+
+.subtitle {
+  letter-spacing:4px;
+  font-size:12px;
+  color:#7fa37c;
+  margin-bottom:20px;
+}
+
+.names {
+  font-family:'Playfair Display', serif;
+  font-size:80px;
+}
+
+.and {
+  font-size:30px;
+  color:#7fa37c;
+}
+
+.text {
+  max-width:500px;
+  margin:20px auto;
+  font-size:18px;
+  line-height:1.6;
+}
+
+.date {
+  margin-top:20px;
+  font-size:20px;
+}
+
+/* BUTTON */
+.btn {
+  margin-top:30px;
+  display:inline-block;
+  padding:12px 30px;
+  border:1px solid #7fa37c;
+  color:#7fa37c;
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.btn:hover {
+  background:#7fa37c;
+  color:white;
+}
+
+/* COUNTDOWN */
+.countdown {
+  background:#5f8a57;
+  color:white;
+  display:flex;
+  justify-content:center;
+  gap:60px;
+  padding:50px 0;
+}
+
+.time-box {
+  font-size:30px;
+}
+
+.time-label {
+  font-size:12px;
+  letter-spacing:2px;
+}
+
+/* DETAILS */
+.details {
+  padding:100px 20px;
+  background:#ffffff;
+}
+
+.details h2 {
+  font-family:'Playfair Display', serif;
+  font-size:40px;
+}
+
+.cards {
+  display:flex;
+  justify-content:center;
+  gap:60px;
+  flex-wrap:wrap;
+  margin-top:50px;
+}
+
+.card {
+  max-width:220px;
+  transition:0.3s;
+}
+
+.card:hover {
+  transform:translateY(-10px);
+}
+
+/* GALLERY */
+.gallery {
+  display:flex;
+  overflow-x:auto;
+  padding:40px;
+}
+
+.gallery img {
+  width:280px;
+  height:380px;
+  object-fit:cover;
+  border-radius:20px;
+  margin-right:20px;
+  transition:0.3s;
+}
+
+.gallery img:hover {
+  transform:scale(1.05);
+}
+
+/* LANGUAGE */
+.lang {
+  position:fixed;
+  top:20px;
+  right:20px;
+}
+
+.lang button {
+  padding:8px 12px;
+  margin:5px;
+  cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="lang">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('ka')">KA</button>
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+  <div class="subtitle" id="subtitle">WITH HEARTS FULL OF LOVE</div>
+
+  <div class="names">Zviadi</div>
+  <div class="and">&</div>
+  <div class="names">Naka</div>
+
+  <div class="text" id="text">
+    We invite you to be part of the most special day of our lives 💕
+  </div>
+
+  <div class="date" id="date">Sunday, June 7, 2026</div>
+
+  <div class="btn">RSVP</div>
+</div>
+
+<!-- COUNTDOWN -->
+
+<div class="countdown" id="countdown"></div>
+
+<!-- DETAILS -->
+
+<div class="details">
+  <div class="subtitle" id="save">SAVE THE DATE</div>
+  <h2 id="detailsTitle">Wedding Details</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3 id="dateT">Date</h3>
+      <p id="dateV">June 7, 2026</p>
+    </div>
+
+```
+<div class="card">
+  <h3 id="ceremonyT">Ceremony</h3>
+  <p id="ceremonyV">Sioni Cathedral<br>15:00</p>
+</div>
+
+<div class="card">
+  <h3 id="partyT">Celebration</h3>
+  <p id="partyV">Lisi Mere<br>16:00</p>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- GALLERY -->
+
+<div class="gallery">
+  <img src="photo1.jpg">
+  <img src="photo2.jpg">
+  <img src="photo3.jpg">
+  <img src="photo4.jpg">
+</div>
+
+<script>
+const targetDate = new Date("June 7, 2026 15:00:00");
+
+setInterval(() => {
+  const now = new Date();
+  const diff = targetDate - now;
+
+  const d = Math.floor(diff/(1000*60*60*24));
+  const h = Math.floor((diff/(1000*60*60))%24);
+  const m = Math.floor((diff/1000/60)%60);
+  const s = Math.floor((diff/1000)%60);
+
+  document.getElementById("countdown").innerHTML =
+    "<div class='time-box'>"+d+"<div class='time-label'>DAYS</div></div>" +
+    "<div class='time-box'>"+h+"<div class='time-label'>HOURS</div></div>" +
+    "<div class='time-box'>"+m+"<div class='time-label'>MIN</div></div>" +
+    "<div class='time-box'>"+s+"<div class='time-label'>SEC</div></div>";
+},1000);
+
+function setLang(lang){
+  if(lang==='ka'){
+    document.getElementById("subtitle").innerText="დიდი სიყვარულით";
+    document.getElementById("text").innerText="დიდი სიხარულით გეპატიჟებით ჩვენი ცხოვრების ყველაზე მნიშვნელოვან დღეს 💕";
+    document.getElementById("date").innerText="7 ივნისი, 2026";
+    document.getElementById("save").innerText="დაიმახსოვრე თარიღი";
+    document.getElementById("detailsTitle").innerText="ქორწილის დეტალები";
+    document.getElementById("dateT").innerText="თარიღი";
+    document.getElementById("ceremonyT").innerText="ცერემონია";
+    document.getElementById("partyT").innerText="წვეულება";
+    document.getElementById("dateV").innerText="7 ივნისი, 2026";
+    document.getElementById("ceremonyV").innerHTML="სიონი საკათედრო ტაძარი<br>15:00";
+    document.getElementById("partyV").innerHTML="ლისი მერე<br>16:00";
+  } else {
+    location.reload();
+  }
+}
+</script>
+
+</body>
+</html>
