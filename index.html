@@ -18,6 +18,19 @@ body{
   font-family:'Inter', sans-serif;
 }
 
+/* 🌍 LANGUAGE */
+.lang{
+  position:fixed;
+  top:15px;
+  right:20px;
+  font-size:14px;
+}
+.lang span{
+  margin:0 6px;
+  cursor:pointer;
+  color:#8c6b4f;
+}
+
 /* 💌 ENVELOPE */
 .envelope-wrapper{
   height:100vh;
@@ -33,18 +46,12 @@ body{
   max-width:90%;
   border-radius:10px;
   box-shadow:0 20px 50px rgba(0,0,0,0.15);
-  transition:0.4s;
-}
-
-.envelope-wrapper:hover .envelope-img{
-  transform:scale(1.05);
 }
 
 .open-text{
   margin-top:15px;
   font-family:'Playfair Display', serif;
   color:#8c6b4f;
-  font-size:18px;
 }
 
 /* MAIN */
@@ -58,7 +65,6 @@ body{
   font-family:'Playfair Display', serif;
   font-style:italic;
   font-size:48px;
-  letter-spacing:1px;
 }
 
 /* TEXT */
@@ -66,17 +72,11 @@ body{
   max-width:420px;
   margin:10px auto;
   font-family:'Playfair Display', serif;
-  font-size:17px;
-}
-
-.heart{
-  color:#c9a37a;
 }
 
 /* DATE */
 .date{
   margin-top:10px;
-  font-size:18px;
   color:#8c6b4f;
 }
 
@@ -93,21 +93,23 @@ body{
 }
 
 /* 📸 SLIDER */
-.slider-section{
-  background:#3f6f4f;
-  padding:30px 0;
-  margin-top:25px;
-}
-
 .slider{
   position:relative;
-  max-width:240px;
-  margin:auto;
+  max-width:260px;
+  margin:30px auto;
 }
 
 .slider img{
   width:100%;
-  border-radius:12px;
+  height:180px;
+  object-fit:cover;
+  border-radius:16px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.15);
+  transition:0.4s;
+}
+
+.slider img:hover{
+  transform:scale(1.03);
 }
 
 .arrow{
@@ -115,19 +117,14 @@ body{
   top:50%;
   transform:translateY(-50%);
   font-size:26px;
-  color:white;
+  color:#8c6b4f;
   cursor:pointer;
-  opacity:0.8;
-}
-
-.arrow:hover{
-  opacity:1;
 }
 
 .left{left:-30px;}
 .right{right:-30px;}
 
-/* 📍 LOCATION */
+/* LOCATION */
 .location{
   margin-top:40px;
 }
@@ -139,7 +136,6 @@ body{
 .title{
   font-family:'Playfair Display', serif;
   font-size:20px;
-  margin-bottom:5px;
 }
 
 .desc{
@@ -159,11 +155,18 @@ body{
 
 <body>
 
+<!-- 🌍 LANGUAGE -->
+
+<div class="lang">
+  <span onclick="setLang('en')">EN</span> |
+  <span onclick="setLang('ka')">KA</span>
+</div>
+
 <!-- 💌 ENVELOPE -->
 
 <div class="envelope-wrapper" onclick="openInvite()">
   <img src="envelope.png.png" class="envelope-img">
-  <div class="open-text">Click to Open</div>
+  <div class="open-text" id="openText">Click to Open</div>
 </div>
 
 <!-- MAIN -->
@@ -172,12 +175,11 @@ body{
 
 <div class="names">Zviadi & Naka</div>
 
-<div class="text">
-With hearts full of love, we invite you to be part of the most special day of our lives
-<span class="heart">♡</span>
+<div class="text" id="inviteText">
+With hearts full of love, we invite you to be part of the most special day of our lives ♡
 </div>
 
-<div class="date">June 7, 2026</div>
+<div class="date" id="dateText">June 7, 2026</div>
 
 <!-- COUNTDOWN -->
 
@@ -190,12 +192,10 @@ With hearts full of love, we invite you to be part of the most special day of ou
 
 <!-- 📸 SLIDER -->
 
-<div class="slider-section">
-  <div class="slider">
-    <span class="arrow left" onclick="prev()">‹</span>
-    <img id="slide" src="photo1.jpg">
-    <span class="arrow right" onclick="next()">›</span>
-  </div>
+<div class="slider">
+  <span class="arrow left" onclick="prev()">‹</span>
+  <img id="slide" src="photo1.jpg">
+  <span class="arrow right" onclick="next()">›</span>
 </div>
 
 <!-- 📍 LOCATION -->
@@ -203,13 +203,13 @@ With hearts full of love, we invite you to be part of the most special day of ou
 <div class="location">
 
 <div class="item">
-  <div class="title">⛪ Ceremony</div>
+  <div class="title" id="ceremonyTitle">⛪ Ceremony</div>
   <div class="desc">Sioni Cathedral — 15:00</div>
 </div>
 
 <div class="item">
-  <div class="title">🥂 Celebration</div>
-  <div class="desc">Lisi Mere — 16:00</div>
+  <div class="title" id="partyTitle">🥂 Celebration</div>
+  <div class="desc">Lisi Mere — 17:00</div>
 </div>
 
 </div>
@@ -237,19 +237,25 @@ setInterval(()=>{
 
 /* SLIDER */
 let i=1;
+function show(){ document.getElementById("slide").src="photo"+i+".jpg"; }
+function next(){ i++; if(i>4)i=1; show(); }
+function prev(){ i--; if(i<1)i=4; show(); }
 
-function show(){
-  document.getElementById("slide").src="photo"+i+".jpg";
-}
-
-function next(){
-  i++; if(i>4)i=1;
-  show();
-}
-
-function prev(){
-  i--; if(i<1)i=4;
-  show();
+/* LANGUAGE */
+function setLang(lang){
+  if(lang==='ka'){
+    document.getElementById('openText').innerText='გახსნა';
+    document.getElementById('inviteText').innerText='დიდი სიყვარულით გეპატიჟებით ჩვენი ცხოვრების ყველაზე მნიშვნელოვან დღეს';
+    document.getElementById('dateText').innerText='7 ივნისი, 2026';
+    document.getElementById('ceremonyTitle').innerText='⛪ ჯვრისწერა';
+    document.getElementById('partyTitle').innerText='🥂 ქორწილი';
+  } else {
+    document.getElementById('openText').innerText='Click to Open';
+    document.getElementById('inviteText').innerText='With hearts full of love, we invite you to be part of the most special day of our lives ♡';
+    document.getElementById('dateText').innerText='June 7, 2026';
+    document.getElementById('ceremonyTitle').innerText='⛪ Ceremony';
+    document.getElementById('partyTitle').innerText='🥂 Celebration';
+  }
 }
 </script>
 
