@@ -18,6 +18,7 @@ color:#2f3e2f;
 text-align:center;
 }
 
+/* ✅ FIXED OVERLAY */
 body::before{
 content:"";
 position:fixed;
@@ -25,10 +26,11 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(255,248,236,0.98);
+background:rgba(255,248,236,0.6); /* აქ არის მთავარი fix */
 z-index:-1;
 }
 
+/* language */
 .lang{
 position:fixed;
 top:20px;
@@ -49,6 +51,7 @@ opacity:1;
 font-weight:bold;
 }
 
+/* envelope */
 .envelope{
 position:fixed;
 top:0;
@@ -67,22 +70,26 @@ width:520px;
 max-width:90%;
 }
 
+/* content */
 .content{
 display:none;
 padding:60px 20px;
 animation:fade 1.5s ease;
 }
+
 @keyframes fade{
 from{opacity:0; transform:translateY(20px);}
 to{opacity:1;}
 }
 
+/* names */
 .names{
 font-size:52px;
 margin-bottom:10px;
 word-spacing:8px;
 }
 
+/* text */
 .text{
 max-width:520px;
 margin:auto;
@@ -90,18 +97,20 @@ font-size:19px;
 line-height:1.7;
 }
 
+/* date */
 .date{
 margin-top:10px;
 font-size:18px;
 }
 
+/* locations */
 .locations{
 margin:30px 0;
 font-size:18px;
 line-height:1.8;
 }
 
-/* 🔥 SLIDER FINAL */
+/* slider */
 .slider{
 position:relative;
 max-width:320px;
@@ -114,7 +123,7 @@ display:none;
 
 .slide img{
 width:100%;
-height:470px; /* ოდნავ გავზარდე */
+height:470px;
 object-fit:cover;
 border-radius:16px;
 box-shadow:0 12px 30px rgba(0,0,0,0.25);
@@ -143,6 +152,7 @@ color:white;
 .prev{left:-10px;}
 .next{right:-10px;}
 
+/* countdown */
 .countdown{
 margin-top:40px;
 display:flex;
@@ -157,6 +167,7 @@ box-shadow:0 5px 15px rgba(0,0,0,0.2);
 min-width:60px;
 }
 
+/* mobile */
 @media(max-width:600px){
 .names{font-size:36px}
 .slider{max-width:90%}
