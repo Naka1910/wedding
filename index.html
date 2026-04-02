@@ -61,15 +61,10 @@ align-items:center;
 background:#f8f1e8;
 z-index:999;
 cursor:pointer;
-transition:1s ease;
 }
 .envelope img{
 width:520px;
 max-width:90%;
-}
-.envelope.hide{
-opacity:0;
-pointer-events:none;
 }
 
 .content{
@@ -106,7 +101,7 @@ font-size:18px;
 line-height:1.8;
 }
 
-/* 🔥 SLIDER UPDATED */
+/* 🔥 SLIDER FINAL */
 .slider{
 position:relative;
 max-width:320px;
@@ -119,13 +114,13 @@ display:none;
 
 .slide img{
 width:100%;
-height:420px;
+height:470px; /* ოდნავ გავზარდე */
 object-fit:cover;
 border-radius:16px;
 box-shadow:0 12px 30px rgba(0,0,0,0.25);
 }
 
-/* 🔥 NEW ARROWS */
+/* arrows */
 .prev,.next{
 position:absolute;
 top:50%;
@@ -138,7 +133,6 @@ cursor:pointer;
 border-radius:50%;
 font-size:14px;
 backdrop-filter:blur(5px);
-transition:0.3s;
 }
 
 .prev:hover,.next:hover{
@@ -166,7 +160,7 @@ min-width:60px;
 @media(max-width:600px){
 .names{font-size:36px}
 .slider{max-width:90%}
-.slide img{height:350px;}
+.slide img{height:400px;}
 }
 
 </style>
@@ -223,13 +217,8 @@ With all our love, we invite you to celebrate the most special day of our lives 
 <script>
 
 function openInvite(){
-let env=document.getElementById("env");
-env.classList.add("hide");
-
-setTimeout(()=>{
-env.style.display="none";
-content.style.display="block";
-},1000);
+document.getElementById("env").style.display="none";
+document.getElementById("content").style.display="block";
 
 let music=document.getElementById("music");
 music.volume=0;
