@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Zvio & Naka</title>
+<title>Zviadi & Naka</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -18,7 +18,6 @@ color:#2f3e2f;
 text-align:center;
 }
 
-/* overlay */
 body::before{
 content:"";
 position:fixed;
@@ -30,7 +29,6 @@ background:rgba(255,248,236,0.98);
 z-index:-1;
 }
 
-/* language */
 .lang{
 position:fixed;
 top:20px;
@@ -51,7 +49,6 @@ opacity:1;
 font-weight:bold;
 }
 
-/* envelope */
 .envelope{
 position:fixed;
 top:0;
@@ -64,63 +61,54 @@ align-items:center;
 background:#f8f1e8;
 z-index:999;
 cursor:pointer;
+transition:1s ease;
 }
 .envelope img{
 width:520px;
 max-width:90%;
 }
+.envelope.hide{
+opacity:0;
+pointer-events:none;
+}
 
-/* content */
 .content{
 display:none;
 padding:60px 20px;
 animation:fade 1.5s ease;
 }
-
 @keyframes fade{
 from{opacity:0; transform:translateY(20px);}
-to{opacity:1; transform:translateY(0);}
+to{opacity:1;}
 }
 
-/* names */
 .names{
 font-size:52px;
 margin-bottom:10px;
+word-spacing:8px;
 }
 
-/* FIXED AMPERSAND */
-.amp{
-font-family:'Great Vibes', cursive;
-font-size:60px;
-margin:0 6px;
-}
-
-/* text */
 .text{
 max-width:520px;
 margin:auto;
 font-size:19px;
 line-height:1.7;
-opacity:0.95;
 }
 
-/* date */
 .date{
 margin-top:10px;
 font-size:18px;
 }
 
-/* locations */
 .locations{
 margin:30px 0;
 font-size:18px;
 line-height:1.8;
 }
 
-/* slider */
 .slider{
 position:relative;
-max-width:420px;
+max-width:360px;
 margin:40px auto;
 }
 .slide{
@@ -128,11 +116,11 @@ display:none;
 }
 .slide img{
 width:100%;
+border-radius:16px;
 box-shadow:0 12px 30px rgba(0,0,0,0.25);
 }
 
-/* arrows */
-.prev, .next{
+.prev,.next{
 position:absolute;
 top:50%;
 transform:translateY(-50%);
@@ -146,7 +134,6 @@ border-radius:50%;
 .prev{left:-10px;}
 .next{right:-10px;}
 
-/* countdown */
 .countdown{
 margin-top:40px;
 display:flex;
@@ -160,13 +147,7 @@ border-radius:12px;
 box-shadow:0 5px 15px rgba(0,0,0,0.2);
 min-width:60px;
 }
-.countdown span{
-font-size:18px;
-font-weight:bold;
-display:block;
-}
 
-/* mobile */
 @media(max-width:600px){
 .names{font-size:36px}
 .slider{max-width:90%}
@@ -188,9 +169,7 @@ display:block;
 
 <div class="content" id="content">
 
-<div class="names">
-Zvio and Naka
-</div>
+<div class="names">Zviadi & Naka</div>
 
 <div class="text" id="text">
 With all our love, we invite you to celebrate the most special day of our lives — our wedding.
@@ -228,8 +207,13 @@ With all our love, we invite you to celebrate the most special day of our lives 
 <script>
 
 function openInvite(){
-document.getElementById("env").style.display="none";
-document.getElementById("content").style.display="block";
+let env=document.getElementById("env");
+env.classList.add("hide");
+
+setTimeout(()=>{
+env.style.display="none";
+content.style.display="block";
+},1000);
 
 let music=document.getElementById("music");
 music.volume=0;
@@ -237,18 +221,13 @@ music.play();
 
 let vol=0;
 let fade=setInterval(()=>{
-if(vol<1){
-vol+=0.05;
-music.volume=vol;
-}else{
-clearInterval(fade);
-}
+if(vol<1){vol+=0.05; music.volume=vol;}
+else{clearInterval(fade);}
 },200);
 
-setTimeout(()=>{setLang('ka');},5000);
+setTimeout(()=>{setLang('ka');},12000);
 }
 
-/* slider */
 let index=0;
 showSlide(index);
 
@@ -262,7 +241,6 @@ for(let s of slides){s.style.display="none";}
 slides[index].style.display="block";
 }
 
-/* countdown */
 let target=new Date("June 7, 2026 15:00:00").getTime();
 setInterval(()=>{
 let now=new Date().getTime();
@@ -273,7 +251,6 @@ m.innerHTML=Math.floor((diff%(1000*60*60))/(1000*60));
 s.innerHTML=Math.floor((diff%(1000*60))/1000);
 },1000);
 
-/* language */
 function setLang(lang){
 if(lang==='ka'){
 text.innerHTML="დიდი სიყვარულით გიწვევთ ჩვენი ცხოვრების ყველაზე მნიშვნელოვან დღეს — ჩვენს ქორწილში.";
